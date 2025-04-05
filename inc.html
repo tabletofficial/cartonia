@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Библиотека Cartonia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Montserrat:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4cc9f0;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --code-bg: #282c34;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark-color);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.2rem;
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--accent-color);
+        }
+        
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-top: 2.5rem;
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .code-example {
+            background: var(--code-bg);
+            color: #abb2bf;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .code-keyword {
+            color: #c678dd;
+        }
+        
+        .code-function {
+            color: #61afef;
+        }
+        
+        .code-string {
+            color: #98c379;
+        }
+        
+        .code-comment {
+            color: #5c6370;
+            font-style: italic;
+        }
+        
+        .code-operator {
+            color: #56b6c2;
+        }
+        
+        .code-number {
+            color: #d19a66;
+        }
+        
+        .example-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .file-reference {
+            display: inline-block;
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary-color);
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+        }
+        
+        .nav {
+            background: var(--dark-color);
+            padding: 1rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+        }
+        
+        .nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 1.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+        }
+        
+        .nav a:hover {
+            color: var(--accent-color);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .example-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav">
+            <a href="index.html">Главная</a>
+            <a href="download.html">Скачать</a>
+            <a href="inc.html">Библиотека</a>
+        </div>
+        
+        <h1>Библиотека Cartonia</h1>
+        <p>Примеры кода и готовые решения для ваших проектов на Cartonia</p>
+        
+        <div class="example-card">
+            <h2>Создание первой программы</h2>
+            <p>Простой пример вашей первой программы на Cartonia:</p>
+            
+            <div class="code-example">
+                <span class="code-keyword">function</span> <span class="code-function">testProgram</span>() { <br>
+                &nbsp;&nbsp;<span class="code-function">input</span>(<span class="code-string">texting</span>; <span class="code-string">"Моя первая программа"</span>)<br>
+                }
+            </div>
+            
+            <p>Этот код создаст простое окно с текстом "Моя первая программа".</p>
+        </div>
+        
+        <div class="example-card">
+            <h2>Программа для заметок</h2>
+            <p>Пример создания приложения для заметок:</p>
+            <p>Требуется файл: <span class="file-reference">creatorzametka.cs</span></p>
+            
+            <div class="code-example">
+                <span class="code-keyword">function</span> <span class="code-function">zametkiPRGM</span> { <br>
+                &nbsp;&nbsp;<span class="code-function">input</span>(<span class="code-string">inputtexting</span>; <span class="code-string">"Введите текст в заметке"</span>)<br>
+                &nbsp;&nbsp;<span class="code-function">input</span>(<span class="code-string">button</span>; <span class="code-string">"Добавить заметку"</span>)<br>
+                &nbsp;&nbsp;<span class="code-function">cartscript</span> {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">if</span> <span class="code-function">button</span>; <span class="code-function">createzametka</span>; <span class="code-keyword">for</span> {<span class="code-string">text</span>}<span class="code-function">writed</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">createzametka</span>; <span class="code-string">"Ceabter"</span>; <span class="code-string">"tabletofficial.github.io/cartonia/inc.html/creatorzametka.crtn"</span><br>
+                &nbsp;&nbsp;}<br>
+                }
+            </div>
+            
+            <p>Этот код создает интерфейс для добавления и сохранения заметок.</p>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2023 Cartonia Language. Все права защищены.</p>
+    </footer>
+</body>
+</html>

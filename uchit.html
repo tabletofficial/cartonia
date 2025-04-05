@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обучение Cartonia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4cc9f0;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --code-bg: #282c34;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #f5f7fa;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        /* Навигация */
+        nav {
+            background: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--secondary-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--dark-color);
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Основной контент */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .page-header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .page-header p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Курсы */
+        .courses-container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+        }
+        
+        @media (max-width: 992px) {
+            .courses-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Сайдбар с уроками */
+        .lessons-sidebar {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 1.5rem;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+        
+        .course-progress {
+            margin-bottom: 1.5rem;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-color);
+            width: 25%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-text {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .lessons-list {
+            list-style: none;
+        }
+        
+        .lesson-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .lesson-item:last-child {
+            border-bottom: none;
+        }
+        
+        .lesson-item:hover {
+            color: var(--primary-color);
+        }
+        
+        .lesson-item.active {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        
+        .lesson-item.completed::before {
+            content: "✓";
+            color: #28a745;
+            margin-right: 0.5rem;
+        }
+        
+        /* Видео и контент урока */
+        .lesson-content {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 2rem;
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            background: #000;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .lesson-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+        
+        .lesson-description {
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+        
+        .lesson-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+        
+        .btn-outline:hover {
+            background: rgba(67, 97, 238, 0.1);
+        }
+        
+        .btn i {
+            margin-right: 0.5rem;
+        }
+        
+        /* Вкладки с дополнительными материалами */
+        .tabs {
+            margin-top: 2rem;
+        }
+        
+        .tab-header {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 1rem;
+        }
+        
+        .tab-link {
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-link.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 1rem 0;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .code-block {
+            background: var(--code-bg);
+            color: #abb2bf;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+        
+        .resources-list {
+            list-style: none;
+        }
+        
+        .resource-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .resource-item a {
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .resource-item a:hover {
+            text-decoration: underline;
+        }
+        
+        .resource-item i {
+            margin-right: 0.8rem;
+            color: #666;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1.5rem;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .lesson-actions {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Cart<span>onia</span></a>
+            <div class="nav-links">
+                <a href="index.html">Главная</a>
+                <a href="uchit.html" class="active">Обучение</a>
+                <a href="inc.html">Библиотека</a>
+                <a href="download.html">Скачать</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Основной контент -->
+    <div class="container">
+        <div class="page-header">
+            <h1>Обучающие материалы по Cartonia</h1>
+            <p>Изучайте язык Cartonia с помощью наших видеоуроков. От основ до продвинутых тем - все в одном месте.</p>
+        </div>
+        
+        <div class="courses-container">
+            <!-- Сайдбар с уроками -->
+            <div class="lessons-sidebar">
+                <div class="course-progress">
+                    <h3>Основы Cartonia</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <div class="progress-text">Прогресс: <span id="progress-text">25</span>%</div>
+                </div>
+                
+                <ul class="lessons-list" id="lessons-list">
+                    <li class="lesson-item active" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ" data-progress="25">
+                        <span>1. Введение в Cartonia</span>
+                    </li>
+                    <li class="lesson-item" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ" data-progress="50">
+                        <span>2. Установка и настройка</span>
+                    </li>
+                    <li class="lesson-item" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ" data-progress="75">
+                        <span>3. Первая программа</span>
+                    </li>
+                    <li class="lesson-item" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ" data-progress="100">
+                        <span>4. Основы синтаксиса</span>
+                    </li>
+                    <li class="lesson-item completed" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+                        <span>5. Переменные и типы данных</span>
+                    </li>
+                    <li class="lesson-item" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+                        <span>6. Условные операторы</span>
+                    </li>
+                    <li class="lesson-item" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+                        <span>7. Циклы</span>
+                    </li>
+                    <li class="lesson-item" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+                        <span>8. Функции</span>
+                    </li>
+                    <li class="lesson-item" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+                        <span>9. Работа с файлами</span>
+                    </li>
+                    <li class="lesson-item" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+                        <span>10. Создание GUI приложений</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Контент урока -->
+            <div class="lesson-content">
+                <h2 class="lesson-title">Введение в Cartonia</h2>
+                <p class="lesson-description">
+                    В этом уроке вы познакомитесь с языком программирования Cartonia. Мы рассмотрим его основные особенности, 
+                    преимущества перед другими языками и сферы применения. Вы узнаете, почему Cartonia - это отличный выбор 
+                    для начинающих и опытных разработчиков.
+                </p>
+                
+                <div class="video-container">
+                    <iframe id="lesson-video" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                
+                <!-- Вкладки с материалами -->
+                <div class="tabs">
+                    <div class="tab-header">
+                        <div class="tab-link active" data-tab="description">Описание</div>
+                        <div class="tab-link" data-tab="code">Пример кода</div>
+                        <div class="tab-link" data-tab="resources">Ресурсы</div>
+                    </div>
+                    
+                    <div class="tab-content active" id="description">
+                        <h3>Что такое Cartonia?</h3>
+                        <p>
+                            Cartonia - это современный язык программирования, сочетающий простоту изучения с мощными возможностями. 
+                            Он был создан с целью сделать программирование доступным для всех, сохраняя при этом гибкость 
+                            и производительность, необходимые для профессиональной разработки.
+                        </p>
+                        <h3>Ключевые особенности:</h3>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>Простой и понятный синтаксис</li>
+                            <li>Высокая производительность</li>
+                            <li>Кроссплатформенность</li>
+                            <li>Богатая стандартная библиотека</li>
+                            <li>Поддержка нескольких парадигм программирования</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="tab-content" id="code">
+                        <h3>Пример первой программы:</h3>
+                        <div class="code-block">
+                            <span style="color: #c678dd;">function</span> <span style="color: #61afef;">main</span>() {<br>
+                            &nbsp;&nbsp;<span style="color: #61afef;">print</span>(<span style="color: #98c379;">"Привет, мир на Cartonia!"</span>)<br>
+                            }<br><br>
+                            <span style="color: #61afef;">main</span>()
+                        </div>
+                        <p>
+                            Этот простой пример демонстрирует базовый синтаксис Cartonia. Как видите, он интуитивно понятен 
+                            и похож на другие современные языки программирования.
+                        </p>
+                    </div>
+                    
+                    <div class="tab-content" id="resources">
+                        <h3>Дополнительные материалы:</h3>
+                        <ul class="resources-list">
+                            <li class="resource-item">
+                                <a href="#"><i class="fas fa-file-pdf"></i> Скачать презентацию урока (PDF)</a>
+                            </li>
+                            <li class="resource-item">
+                                <a href="#"><i class="fas fa-code"></i> Исходный код примеров</a>
+                            </li>
+                            <li class="resource-item">
+                                <a href="#"><i class="fas fa-book"></i> Официальная документация Cartonia</a>
+                            </li>
+                            <li class="resource-item">
+                                <a href="#"><i class="fas fa-question-circle"></i> Часто задаваемые вопросы</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="lesson-actions">
+                    <button class="btn btn-outline">
+                        <i class="fas fa-arrow-left"></i> Предыдущий урок
+                    </button>
+                    <button class="btn btn-primary">
+                        Следующий урок <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Переключение уроков
+        const lessonItems = document.querySelectorAll('.lesson-item');
+        const lessonVideo = document.getElementById('lesson-video');
+        const progressFill = document.getElementById('progress-fill');
+        const progressText = document.getElementById('progress-text');
+        
+        lessonItems.forEach(item => {
+            item.addEventListener('click', function() {
+                // Удаляем активный класс у всех элементов
+                lessonItems.forEach(i => i.classList.remove('active'));
+                
+                // Добавляем активный класс текущему элементу
+                this.classList.add('active');
+                
+                // Меняем видео
+                const videoUrl = this.getAttribute('data-video');
+                lessonVideo.src = videoUrl;
+                
+                // Обновляем прогресс
+                const progress = this.getAttribute('data-progress');
+                if (progress) {
+                    progressFill.style.width = progress + '%';
+                    progressText.textContent = progress;
+                }
+                
+                // Прокручиваем к верху
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+        
+        // Переключение вкладок
+        const tabLinks = document.querySelectorAll('.tab-link');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                const tabId = this.getAttribute('data-tab');
+                
+                // Удаляем активный класс у всех вкладок
+                tabLinks.forEach(l => l.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                // Добавляем активный класс текущей вкладке
+                this.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Кнопки навигации
+        const nextBtn = document.querySelector('.btn-primary');
+        const prevBtn = document.querySelector('.btn-outline');
+        
+        nextBtn.addEventListener('click', function() {
+            const currentActive = document.querySelector('.lesson-item.active');
+            const nextItem = currentActive.nextElementSibling;
+            
+            if (nextItem && nextItem.classList.contains('lesson-item')) {
+                nextItem.click();
+            }
+        });
+        
+        prevBtn.addEventListener('click', function() {
+            const currentActive = document.querySelector('.lesson-item.active');
+            const prevItem = currentActive.previousElementSibling;
+            
+            if (prevItem && prevItem.classList.contains('lesson-item')) {
+                prevItem.click();
+            }
+        });
+    </script>
+</body>
+</html>
+</html>
